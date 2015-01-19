@@ -9,7 +9,7 @@
     <script src="calculator-app.js" type="text/javascript"></script>
 </head>
 <body>
-    <div style="float: left;">
+    <div id="calculator">
         <div id="calculatorApp">
             <input type="text" id="txtCalculation" />
             <input type="text" id="txtResult" />
@@ -47,16 +47,14 @@
                 </tr>
             </table>
         </div>
-        <div id="calculationList">
-            <div id="calculationListButtonsAndTexts">
-                <div><input type="button" id="btnAddComment" value="Add comment" /></div>
-                <div><input type="button" id="btnPrint" value="Print Results" /></div>
-                <div><input type="button" id="btnClearResultsList" value="Clear results (F5)" /></div>
-                <div><label>Tip: Drag and drop calculations to change order!</label></div>
-            </div>
+        <div id="calculatorHelperButtons">
+            <div><input type="button" id="btnAddComment" value="Add comment" /></div>
+            <div><input type="button" id="btnPrint" value="Print Results" /></div>
+            <div><input type="button" id="btnClearResultsList" value="Clear results (F5)" /></div>
+            <div><label>Tip: Drag and drop calculations to change order!</label></div>
         </div>
     </div>
-    <div style="float: left;">
+    <div id="calculations">
         <h3>Calculations</h3>
         <ol id="sortable"></ol>
     </div>

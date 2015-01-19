@@ -1,4 +1,8 @@
 ﻿
+#calculator, #calculations {
+    float: left;
+}
+
 #calculatorApp table {
     width: 230px;
 }
@@ -23,7 +27,7 @@ input[type=button] {
 }
 
 
-#calculationList {
+#calculatorHelperButtons {
     margin-left: 2.5px;
     margin-top: 10px;
 }
@@ -33,25 +37,48 @@ input[type=button] {
 
 }
 
-#calculationList div {
+#calculatorHelperButtons div {
     margin-top: 5px;
     margin-bottom: 5px;
 }
 
-#calculationListButtonsAndTexts input[type=button] {
+#calculatorHelperButtons input[type=button] {
     width: 225px;
     height: 40px;
 }
 
+#calculations {
+    width: 400px;
+}
+
+ol#sortable {
+    list-style: none;
+    -webkit-padding-start: 0px;
+}
+
 ol#sortable li {
     border: solid thin;
-    margin: 4px 0px;
-    padding: 4px 4px;
-    max-width: 800px;
+    width: 100%;
+    margin: 5px 0px;
+    padding: 10px;
+}
+
+ol#sortable li div:first-child {
+    float: left;
+    max-width: 90%;
+}
+
+ol#sortable li div.ui-icon {
+    float: right;
+    border: solid thin;
+}
+
+ol#sortable li div:last-child {
+    clear: both;
 }
 
 @media print {
-    #calculatorApp, #calculationListButtonsAndTexts {
+    #calculatorApp, #calculationListButtons {
         display: none;
     }
     span {

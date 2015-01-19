@@ -9,8 +9,8 @@ function CalculatorInitialize() {
     $('#btnClearCharacter').on("click", ClearCharacter);
     $('#btnClearAll').on("click", ClearAll);
     $('#btnChangeSign').on("click", ChangeNumberSign);
-    AddNumberEvenListeners();
-    AddOperatorEvenListeners();
+    AddNumberEventListeners();
+    AddOperatorEventListeners();
     $('#btnComma').on("click", AddComma);
     $('#btnTotal').on("click", CalculateTotal);
 
@@ -34,10 +34,8 @@ function GetLastCharacter(string) {
 }
 
 function IsLastCharacterOperator(string) {
-    if (IsOperator(GetLastCharacter(string))) {
+    if (IsOperator(GetLastCharacter(string))) 
         return true;
-    }
-
     return false;
 }
 
@@ -49,11 +47,22 @@ function SetResult(result) {
     $('#txtResult').val(result);
 }
 
-function CalculateTotal() {
+function AddCalculationAsResult(result) {
     var lasku = GetCalculation();
-    var allCalculations = GetCalculation();
+    $('#txtResult').val(result);
 
+    var lisattava = '<li><div>' + lasku + ' = ' + result + '</div><div class="ui-icon ui-icon-closethick"></div><div></div></li>'
+    $('#sortable').append(lisattava)
+
+    SetCalculation(0);
+}
+
+function CalculateTotal() {
+    var allCalculations = GetCalculation();
     var numberOfCalculations = CountNumberOfCalculations(allCalculations);
+
+    if (numberOfCalculations === 0)
+        return;
 
     for (var i = 0; i < numberOfCalculations; i++) {
         var calculation = TakeCalculation(allCalculations);
@@ -61,13 +70,17 @@ function CalculateTotal() {
         allCalculations = ReplaceCalculationWithResult(allCalculations, calculation, result);
     }
 
-    $('#txtResult').val(allCalculations);
-
-    var lisattava = '<li><div style="width: 95%; display: inline-block;">' + lasku + ' = ' + allCalculations + '</div><span class="ui-icon ui-icon-closethick" style="border: solid thin; border-radius: 0.3em; width: 18px; height: 18px; display: inline-block; vertical-align: middle;"></span>' + '</li>'
-    $('#sortable').append(lisattava)
-
-    SetCalculation(0);
+    AddCalculationAsResult(result);
 }
+
+function ReplaceCalculationWithResult(allCalculations, calculation, result) {
+    var poistettavaSetti = calculation["firstNumber"].toString().length +
+                           calculation["operator"].toString().length +
+                           calculation["secondNumber"].toString().length;
+    var newCalculation = allCalculations.substring(poistettavaSetti, allCalculations.length);
+    return result + newCalculation;
+}
+
 
 function CountNumberOfCalculations(allCalculations) {
     var numberOfCalculations = 0;
@@ -123,14 +136,6 @@ function ExecuteCalculation(calculation) {
             break;
     }
 }
-
-function ReplaceCalculationWithResult(allCalculations, calculation, result) {
-    var poistettavaSetti = calculation.length;
-    var newCalculation = allCalculations.substring(poistettavaSetti, allCalculations.length);
-    newCalculation = result + newCalculation;
-    return newCalculation;
-}
-
 
 function ClearCharacter() {
     var calculation = GetCalculation();
@@ -193,7 +198,7 @@ function IsOperator(character) {
     return false;
 }
 
-function AddNumberEvenListeners() {
+function AddNumberEventListeners() {
     for (var i = 0; i < 10; i++) {
         (function (j) {
             var btnNumber = "#btn" + j;
@@ -202,7 +207,7 @@ function AddNumberEvenListeners() {
     }
 }
 
-function AddOperatorEvenListeners() {
+function AddOperatorEventListeners() {
     $('#btnSum').on("click", function () { AddOperator('+') })
     $('#btnSubstract').on("click", function () { AddOperator('-') })
     $('#btnMultiply').on("click", function () { AddOperator('*') })
@@ -245,7 +250,7 @@ function AddComment() {
     if (comment !== undefined &&
         comment !== "") {
 
-        var lisattava = '<li><div style="width: 95%; display: inline-block;">' + comment + '</div><span class="ui-icon ui-icon-closethick" style="border: solid thin; border-radius: 0.3em; width: 18px; height: 18px; display: inline-block; vertical-align: middle;"></span>' + '</li>'
+        var lisattava = '<li><div>' + comment + '</div><div class="ui-icon ui-icon-closethick"></div><div></div></li>'
         $('#sortable').append(lisattava)
     }
 }
