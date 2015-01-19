@@ -256,7 +256,6 @@ function AddComment() {
 }
 
 function PrintCalculations() {
-    $('span.ui-icon').remove();
     window.print();
 }
 

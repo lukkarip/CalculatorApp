@@ -78,10 +78,7 @@ ol#sortable li div:last-child {
 }
 
 @media print {
-    #calculatorApp, #calculationListButtons {
+    #calculatorApp, #calculatorHelperButtons, .ui-icon {
         display: none;
-    }
-    span {
-        background-color: red;
     }
 }
