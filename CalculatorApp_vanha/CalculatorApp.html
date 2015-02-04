@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="Content/themes/base/all.css" />
     <link rel="stylesheet" href="calculator-app.css" type="text/css" />
     <script src="Scripts/jquery-1.11.1.min.js"></script>
-    <script src="Scripts/jquery-ui.min-1.11.1.js"></script>
+    <script src="Scripts/jquery-ui-1.11.2.min.js"></script>
     <script src="calculator-app.js" type="text/javascript"></script>
 </head>
 <body>
@@ -50,12 +50,13 @@
         <div id="calculatorHelperButtons">
             <div><input type="button" id="btnAddComment" value="Add comment" /></div>
             <div><input type="button" id="btnPrint" value="Print Results" /></div>
-            <div><input type="button" id="btnClearResultsList" value="Clear results (F5)" /></div>
-            <div><label>Tip: Drag and drop calculations to change order!</label></div>
+            <div><input type="button" id="btnClearResultsList" value="Clear results" /></div>
+
         </div>
     </div>
     <div id="calculations">
-        <h3>Calculations</h3>
+        <div><label id="calculationsHeading">Calculations</label></div>
+        <div><label id="calculationsTip">Tip: Drag and drop calculations to change order!</label></div>
         <ol id="sortable"></ol>
     </div>
 </body>

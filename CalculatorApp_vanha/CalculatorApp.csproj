@@ -106,8 +106,8 @@
     <Content Include="calculator-app.css" />
     <Content Include="calculator-app.js" />
     <Content Include="CalculatorApp.html" />
-    <Content Include="Scripts\jquery-ui-1.11.1.js" />
-    <Content Include="Scripts\jquery-ui.min-1.11.1.js" />
+    <Content Include="Scripts\jquery-ui-1.11.2.js" />
+    <Content Include="Scripts\jquery-ui-1.11.2.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

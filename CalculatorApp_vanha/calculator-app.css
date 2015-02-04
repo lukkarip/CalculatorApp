@@ -1,5 +1,6 @@
 ﻿
 #calculator, #calculations {
+    font-family: Calibri !important;
     float: left;
 }
 
@@ -48,7 +49,19 @@ input[type=button] {
 }
 
 #calculations {
-    width: 400px;
+    width: 500px;
+    border: 1px solid;
+    margin-left: 10px;
+}
+
+#calculationsHeading {
+    font-size: 26px;
+    font-weight: bold;
+    margin: 10px;
+}
+
+#calculationsTip {
+    margin: 10px;
 }
 
 ol#sortable {
@@ -58,8 +71,8 @@ ol#sortable {
 
 ol#sortable li {
     border: solid thin;
-    width: 100%;
-    margin: 5px 0px;
+    width: 90%;
+    margin: 10px;
     padding: 10px;
 }
 
@@ -77,8 +90,12 @@ ol#sortable li div:last-child {
     clear: both;
 }
 
+.ui-icon-closethick:hover {
+    cursor: pointer;
+}
+
 @media print {
-    #calculatorApp, #calculatorHelperButtons, .ui-icon {
+    #calculatorApp, #calculatorHelperButtons, #calculationsTip, .ui-icon {
         display: none;
     }
 }

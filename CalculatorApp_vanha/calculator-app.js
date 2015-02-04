@@ -1,5 +1,6 @@
-﻿/// <reference path="C:\Files\Source\Repos\CalculatorApp\Scripts/jquery-1.11.1.js" />
-/// <reference path="C:\Files\Source\Repos\CalculatorApp\Scripts/jquery-ui-1.11.1.js" />
+﻿/// <reference path="C:\Files\Source\Repos\CalculatorApp_vanha\Scripts/jquery-1.11.1.intellisense.js" />
+/// <reference path="C:\Files\Source\Repos\CalculatorApp_vanha\Scripts/jquery-1.11.1.js" />
+/// <reference path="C:\Files\Source\Repos\CalculatorApp_vanha\Scripts/jquery-ui-1.11.2.js" />
 
 $(document).ready(function () {
     CalculatorInitialize();
@@ -51,7 +52,7 @@ function AddCalculationAsResult(result) {
     var lasku = GetCalculation();
     $('#txtResult').val(result);
 
-    var lisattava = '<li><div>' + lasku + ' = ' + result + '</div><div class="ui-icon ui-icon-closethick"></div><div></div></li>'
+    var lisattava = '<li><div>' + lasku + ' = ' + result + '</div><div class="ui-icon ui-icon-closethick" onclick="RemoveCalculation(event);"></div><div></div></li>'
     $('#sortable').append(lisattava)
 
     SetCalculation(0);
@@ -164,11 +165,6 @@ function ChangeNumberSign() {
 
     if (operatorPosition === 0) {
         SetCalculation(-parseFloat(calculation));
-    } else {
-        var formerCalculation = calculation.substring(0, operatorPosition + 1);
-        var lastAddedNumber = parseFloat(calculation.substring(operatorPosition + 1));
-        var lastAddedNumberSignChanged = -(lastAddedNumber);
-        SetCalculation(formerCalculation + lastAddedNumberSignChanged);
     }
 }
 
@@ -250,7 +246,7 @@ function AddComment() {
     if (comment !== undefined &&
         comment !== "") {
 
-        var lisattava = '<li><div>' + comment + '</div><div class="ui-icon ui-icon-closethick"></div><div></div></li>'
+        var lisattava = '<li><div>' + comment + '</div><div class="ui-icon ui-icon-closethick" onclick="RemoveCalculation(event);"></div><div></div></li>'
         $('#sortable').append(lisattava)
     }
 }
@@ -261,6 +257,10 @@ function PrintCalculations() {
 
 function ClearResultsList() {
     if (window.confirm('Really want to empty all results?')) {
-        window.location.reload(true);
+        $('#sortable').empty();
     }
+}
+
+function RemoveCalculation(event) {
+    $(event.target).parent().remove();
 }
