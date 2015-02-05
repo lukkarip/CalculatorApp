@@ -30,7 +30,7 @@ input[type=button] {
 
 #calculatorHelperButtons {
     margin-left: 2.5px;
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
 .empty-background {
@@ -48,6 +48,10 @@ input[type=button] {
     height: 40px;
 }
 
+#calculatorPrintButtons {
+    padding-top: 15px;
+}
+
 #calculations {
     width: 500px;
     border: 1px solid;
@@ -61,6 +65,7 @@ input[type=button] {
 }
 
 #calculationsTip {
+    font-size: 13px;
     margin: 10px;
 }
 
@@ -92,6 +97,15 @@ ol#sortable li div:last-child {
 
 .ui-icon-closethick:hover {
     cursor: pointer;
+}
+
+.ui-state-highlight {
+    height: 25px;
+}
+
+.ui-sortable-helper {
+    background-color: lightblue;
+    outline: 2px solid black;
 }
 
 @media print {

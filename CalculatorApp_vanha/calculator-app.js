@@ -1,5 +1,6 @@
 ﻿/// <reference path="C:\Files\Source\Repos\CalculatorApp_vanha\Scripts/jquery-1.11.1.intellisense.js" />
 /// <reference path="C:\Files\Source\Repos\CalculatorApp_vanha\Scripts/jquery-1.11.1.js" />
+/// <reference path="C:\Files\Source\Repos\CalculatorApp_vanha\Scripts/jspdf/jspdf.source.js" />
 /// <reference path="C:\Files\Source\Repos\CalculatorApp_vanha\Scripts/jquery-ui-1.11.2.js" />
 
 $(document).ready(function () {
@@ -19,10 +20,13 @@ function CalculatorInitialize() {
     SetResult(0);
 
     $('#btnAddComment').on("click", AddComment);
-    $('#btnPrint').on("click", PrintCalculations)
     $('#btnClearResultsList').on("click", ClearResultsList);
+    $('#btnPrint').on("click", PrintCalculations);
+    $('#btnPDF').on("click", DownloadPDF);
 
-    $("#sortable").sortable();
+    $("#sortable").sortable({
+        placeholder: "ui-state-highlight"
+    });
     $("#sortable").disableSelection();
 }
 
@@ -213,7 +217,7 @@ function AddOperatorEventListeners() {
 function AddNumber(number) {
     var calculation = GetCalculation();
 
-    if (calculation == 0) {
+    if (calculation === "0") {
         SetCalculation(number);
     } else {
         var newCalculation = calculation + number;
@@ -224,7 +228,7 @@ function AddNumber(number) {
 function AddOperator(operator) {
     var calculation = GetCalculation();
 
-    if (calculation == 0) {
+    if (calculation === "0") {
         return;
     }
 
@@ -237,7 +241,15 @@ function AddOperator(operator) {
 }
 
 function AddComma() {
+    var calculation = GetCalculation();
+    var lastCharacter = calculation.slice(-1);
 
+    if (IsLastCharacterOperator(lastCharacter)) {
+        return;
+    }
+
+    var newCalculcation = calculation + '.';
+    SetCalculation(newCalculcation);
 }
 
 function AddComment() {
@@ -263,4 +275,32 @@ function ClearResultsList() {
 
 function RemoveCalculation(event) {
     $(event.target).parent().remove();
+}
+
+function DownloadPDF() {
+    var newPdf = new jsPDF();
+
+    var xAxisPosition = 15;
+    var yAxisPosition = 15;
+
+    newPdf.setFontSize(26);
+    newPdf.text(xAxisPosition, yAxisPosition, 'Calculations');
+
+    newPdf.setFontSize(14);
+    newPdf.setFont("courier");
+
+    var counter = 0;
+
+    $.each($('ol#sortable li'), function (index, value) {
+        if (counter > 25) {
+            newPdf.addPage();
+            yAxisPosition = 15;
+            counter = 0;
+        }
+        counter = counter + 1;
+        yAxisPosition = yAxisPosition + 10;
+        newPdf.text(15, yAxisPosition, $(this).children('div:first-child').text())
+    });
+
+    newPdf.save('Test.pdf');
 }
